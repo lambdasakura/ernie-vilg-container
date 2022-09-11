@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: "./"              
+    volumes:
+      - "./main.py:/usr/src/main.py"
+      - "./output/:/usr/src/output/"
+      - "elnie-cache:/root/.cache"
+      - "elnie-model-cache:/root/.paddlehub"
+    working_dir: /usr/src
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+volumes:
+  elnie-cache:
+  elnie-model-cache:
